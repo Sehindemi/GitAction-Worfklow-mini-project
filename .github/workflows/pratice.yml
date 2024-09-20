@@ -1,11 +1,8 @@
-name: second-actions
+name: output information
 on: workflow_dispatch
 jobs:
-    helloworld:
+    info:
         runs-on: ubuntu-latest
         steps:
-            - name: hello world
-              run: |
-                echo "Hello World"
-                echo "Bye World"
-              
+            - name: output github key
+              run: "${{ tojson(github) }}"
