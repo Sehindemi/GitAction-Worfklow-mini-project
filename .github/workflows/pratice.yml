@@ -1,8 +1,37 @@
-name: output information
-on: workflow_dispatch
+name: Deploy project
+on: push
 jobs:
-    info:
+    test-job:
         runs-on: ubuntu-latest
         steps:
-            - name: output github key
-              run: echo "${{ tojson(github) }}"
+            - name: get code
+              uses: actions/checkout@v3
+            
+            - name: install NodeJs
+              uses: actions/setup-node@v4
+
+            - name: install dependcies
+              run: npm ci
+
+            - name: testing
+              run: npm test
+                        
+    deploy-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get code
+              uses: actions/checkout@v4
+            
+            - name: installing NodeJs
+              uses: actions/setup-node@v4
+
+            - name: installing dependencies
+              run: npm ci
+
+            - name: build project
+              run: npm buid
+
+            - name: deploy project
+              run: echo "Deploying"
+
+
